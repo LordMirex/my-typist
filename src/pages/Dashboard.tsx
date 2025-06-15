@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -124,11 +123,18 @@ const Dashboard = () => {
     }
   };
 
+  const [search, setSearch] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  const filteredDocuments = recentDocuments.filter(doc =>
+    doc.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50 animate-fade-in">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200">
+        <div className="bg-white border-b border-brand-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex items-center justify-between">
               <div>
@@ -142,9 +148,27 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Stats Grid */}
+          {/* Dashboard Search / Simulated Error button */}
+          <div className="flex flex-col md:flex-row md:justify-end gap-2 mb-8">
+            <input
+              type="search"
+              className="border border-gray-300 bg-white px-4 py-2 rounded shadow-sm outline-none focus:ring-2 focus:ring-brand-200 w-full md:w-80"
+              placeholder="Search your documents"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              onClick={() => setShowError(!showError)}
+              className="text-red-600 border-red-300"
+            >
+              Toggle Error
+            </Button>
+          </div>
+          {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {stats.map((stat, index) => (
               <Card 
@@ -171,7 +195,6 @@ const Dashboard = () => {
               </Card>
             ))}
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Recent Documents */}
             <div className="lg:col-span-2">
@@ -190,43 +213,53 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {recentDocuments.map((doc, index) => (
-                      <div 
-                        key={doc.id}
-                        className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer animate-slide-in"
-                        style={{ animationDelay: `${index * 100}ms` }}
-                      >
-                        <div className="flex items-center space-x-4">
-                          <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center">
-                            <FileText className="w-5 h-5 text-brand-600" />
+                    {showError ? (
+                      <div className="p-8 text-center text-red-500">
+                        <div className="mb-2 font-semibold text-lg">Error loading documents.</div>
+                        <div>Please try again later.</div>
+                      </div>
+                    ) : filteredDocuments.length === 0 ? (
+                      <div className="p-8 text-center text-gray-500">
+                        No documents found{search ? ` for "${search}"` : ""}.
+                      </div>
+                    ) : (
+                      filteredDocuments.map((doc, index) => (
+                        <div 
+                          key={doc.id}
+                          className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer animate-slide-in"
+                          style={{ animationDelay: `${index * 100}ms` }}
+                        >
+                          <div className="flex items-center space-x-4">
+                            <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center">
+                              <FileText className="w-5 h-5 text-brand-600" />
+                            </div>
+                            <div>
+                              <h4 className="font-medium text-gray-900">{doc.name}</h4>
+                              <div className="flex items-center space-x-2 mt-1">
+                                <span className="text-sm text-gray-500">{doc.type}</span>
+                                <span className="text-gray-300">•</span>
+                                <span className="text-sm text-gray-500">{doc.date}</span>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <h4 className="font-medium text-gray-900">{doc.name}</h4>
-                            <div className="flex items-center space-x-2 mt-1">
-                              <span className="text-sm text-gray-500">{doc.type}</span>
-                              <span className="text-gray-300">•</span>
-                              <span className="text-sm text-gray-500">{doc.date}</span>
+                          <div className="flex items-center space-x-3">
+                            <Badge className={getStatusColor(doc.status)}>
+                              {doc.status}
+                            </Badge>
+                            <div className="w-16 h-2 bg-gray-200 rounded-full">
+                              <div 
+                                className="h-2 bg-brand-600 rounded-full transition-all duration-300"
+                                style={{ width: `${doc.progress}%` }}
+                              />
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-3">
-                          <Badge className={getStatusColor(doc.status)}>
-                            {doc.status}
-                          </Badge>
-                          <div className="w-16 h-2 bg-gray-200 rounded-full">
-                            <div 
-                              className="h-2 bg-brand-600 rounded-full transition-all duration-300"
-                              style={{ width: `${doc.progress}%` }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 </CardContent>
               </Card>
             </div>
-
             {/* Quick Actions */}
             <div>
               <Card>

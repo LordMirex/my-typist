@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
@@ -8,12 +7,13 @@ import { CheckCircle, Star, X } from 'lucide-react';
 
 const Pricing = () => {
   const [annually, setAnnually] = useState(false);
+  const [billing, setBilling] = useState<'monthly' | 'quarterly'>('monthly');
 
   const plans = [
     {
       name: 'Free',
       monthlyPrice: '₦0',
-      annualPrice: '₦0',
+      quarterlyPrice: '₦0',
       description: 'Perfect for individuals getting started',
       features: [
         { name: 'Documents per month', value: '5', included: true },
@@ -34,7 +34,7 @@ const Pricing = () => {
     {
       name: 'Professional',
       monthlyPrice: '₦7,500',
-      annualPrice: '₦75,000',
+      quarterlyPrice: '₦21,000',
       description: 'Ideal for small teams and growing businesses',
       features: [
         { name: 'Documents per month', value: 'Unlimited', included: true },
@@ -55,7 +55,7 @@ const Pricing = () => {
     {
       name: 'Enterprise',
       monthlyPrice: '₦12,000',
-      annualPrice: '₦120,000',
+      quarterlyPrice: '₦33,000',
       description: 'For large organizations with advanced needs',
       features: [
         { name: 'Documents per month', value: 'Unlimited', included: true },
@@ -92,27 +92,28 @@ const Pricing = () => {
 
             {/* Billing Toggle */}
             <div className="flex items-center justify-center space-x-4 mb-8">
-              <span className={`text-sm font-medium ${!annually ? 'text-gray-900' : 'text-gray-500'}`}>
+              <span className={`text-sm font-medium ${billing === 'monthly' ? 'text-gray-900' : 'text-gray-500'}`}>
                 Monthly
               </span>
               <button
-                onClick={() => setAnnually(!annually)}
+                onClick={() => setBilling(billing === 'monthly' ? 'quarterly' : 'monthly')}
                 className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 ${
-                  annually ? 'bg-brand-600' : 'bg-gray-200'
+                  billing === 'quarterly' ? 'bg-brand-600' : 'bg-gray-200'
                 }`}
+                aria-label="Toggle monthly/quarterly"
               >
                 <span
                   className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition duration-200 ease-in-out ${
-                    annually ? 'translate-x-5' : 'translate-x-0'
+                    billing === 'quarterly' ? 'translate-x-5' : 'translate-x-0'
                   }`}
                 />
               </button>
-              <span className={`text-sm font-medium ${annually ? 'text-gray-900' : 'text-gray-500'}`}>
-                Annually
+              <span className={`text-sm font-medium ${billing === 'quarterly' ? 'text-gray-900' : 'text-gray-500'}`}>
+                Quarterly
               </span>
-              {annually && (
-                <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                  Save 17%
+              {billing === 'quarterly' && (
+                <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full ml-2">
+                  Save 12%
                 </span>
               )}
             </div>
@@ -147,10 +148,10 @@ const Pricing = () => {
                     </h3>
                     <div className="mt-4">
                       <span className="text-4xl font-bold text-gray-900">
-                        {annually ? plan.annualPrice : plan.monthlyPrice}
+                        {billing === 'monthly' ? plan.monthlyPrice : plan.quarterlyPrice}
                       </span>
                       <span className="text-gray-500 ml-1">
-                        /{annually ? 'year' : 'month'}
+                        /{billing === 'monthly' ? 'month' : 'quarter'}
                       </span>
                     </div>
                     <p className="text-gray-600 mt-2">{plan.description}</p>
