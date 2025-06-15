@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, FileText, PenTool, ChevronDown, Shield } from 'lucide-react';
+import { Menu, X, ChevronDown, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Temporary (mock) user state, to be replaced with real auth
@@ -64,14 +64,22 @@ const Navigation = () => {
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="flex items-center space-x-1">
-              <FileText className="h-8 w-8 text-brand-600" />
-              <PenTool className="h-6 w-6 text-brand-500" />
-              {role === "admin" && <Shield className="h-5 w-5 text-yellow-600 ml-2" />}
+          {/* Modern Logo */}
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="relative">
+              <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-brand-700 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
+                <span className="text-white font-bold text-lg">MT</span>
+              </div>
+              {role === "admin" && (
+                <Shield className="absolute -top-1 -right-1 h-4 w-4 text-yellow-600 bg-white rounded-full p-0.5" />
+              )}
             </div>
-            <span className="text-xl font-bold text-gray-900">MyTypist</span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-700 bg-clip-text text-transparent">
+                MyTypist
+              </span>
+              <span className="text-xs text-gray-500 -mt-1">Professional Documents</span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -253,4 +261,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
