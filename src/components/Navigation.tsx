@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, FileText, PenTool } from 'lucide-react';
+import { Menu, X, FileText, PenTool, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -16,6 +17,13 @@ const Navigation = () => {
     { name: 'How to Use', href: '/how-to-use' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
+  ];
+
+  const toolsItems = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Templates', href: '/templates' },
+    { name: 'Create Document', href: '/create-document' },
+    { name: 'Profile', href: '/profile' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -49,6 +57,44 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Tools Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={cn(
+                  "flex items-center text-sm font-medium transition-colors hover:text-brand-600",
+                  toolsItems.some(item => isActive(item.href))
+                    ? "text-brand-600"
+                    : "text-gray-700"
+                )}
+              >
+                Tools
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+              
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                  <div className="py-1">
+                    {toolsItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className={cn(
+                          "block px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
+                          isActive(item.href)
+                            ? "text-brand-600 bg-brand-50"
+                            : "text-gray-700"
+                        )}
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Auth Buttons */}
@@ -96,6 +142,29 @@ const Navigation = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Tools section in mobile */}
+              <div className="px-3 py-2">
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">
+                  Tools
+                </div>
+                {toolsItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={cn(
+                      "block px-3 py-2 text-base font-medium transition-colors",
+                      isActive(item.href)
+                        ? "text-brand-600 bg-brand-50"
+                        : "text-gray-700 hover:text-brand-600 hover:bg-gray-50"
+                    )}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              
               <div className="flex flex-col space-y-2 px-3 pt-4">
                 <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="outline" size="sm" className="w-full">
