@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -249,7 +248,7 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="flex items-center justify-between lg:justify-end space-x-2 lg:space-x-3">
-                            <Badge className={getStatusColor(doc.status)} size="sm">
+                            <Badge className={getStatusColor(doc.status)}>
                               {doc.status}
                             </Badge>
                             <div className="w-12 lg:w-16 h-2 bg-gray-200 rounded-full">

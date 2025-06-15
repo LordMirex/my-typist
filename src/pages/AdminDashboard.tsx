@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -274,10 +273,10 @@ const AdminDashboard = () => {
                         </div>
                         <div className="flex items-center justify-between lg:justify-end space-x-2 lg:space-x-3">
                           <div className="flex space-x-2">
-                            <Badge className={getRoleColor(user.role)} size="sm">
+                            <Badge className={getRoleColor(user.role)}>
                               {user.role}
                             </Badge>
-                            <Badge className={getStatusColor(user.status)} size="sm">
+                            <Badge className={getStatusColor(user.status)}>
                               {user.status}
                             </Badge>
                           </div>
