@@ -31,6 +31,7 @@ import Support from "./pages/Support";
 import Settings from "./pages/Settings";
 import Bonuses from "./pages/Bonuses";
 import Analytics from "./pages/Analytics";
+import AdminUploadTemplate from "./pages/AdminUploadTemplate";
 
 // TODO: Replace with real global auth state/provider!
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
             <Route path="/templates" element={<Templates />} />
             <Route path="/create-document" element={<CreateDocument />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/upload-template" element={<AdminUploadTemplate />} />
             <Route path="/profile" element={<Profile />} />
 
             {/* New Pages */}

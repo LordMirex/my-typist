@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -38,7 +37,7 @@ const Navigation = () => {
           <Logo role={role} />
           
           {/* Desktop Navigation */}
-          <NavigationItems />
+          <NavigationItems role={role} />
           <ToolsMenu role={role} />
           <AuthButtons role={role} />
 
