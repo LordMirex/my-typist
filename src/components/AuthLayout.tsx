@@ -15,23 +15,36 @@ const AuthLayout = ({ children, title, description }: AuthLayoutProps) => {
       <div className="flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="flex justify-center mb-8">
-            <div className="flex items-center space-x-3">
+            <div className="relative group">
+              {/* Enhanced layered logo design */}
               <div className="relative">
-                <div className="w-14 h-14 bg-gradient-to-br from-brand-600 to-brand-700 rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-105 transition-all duration-300">
-                  <div className="relative">
-                    <span className="text-white font-bold text-2xl">M</span>
-                    <span className="absolute -top-1 -right-2 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></span>
+                {/* Background "My" */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-6xl sm:text-7xl font-black text-brand-100/30 select-none transform -rotate-3">
+                    My
+                  </span>
+                </div>
+                
+                {/* Foreground "Typist" */}
+                <div className="relative z-10 bg-gradient-to-br from-brand-600 to-brand-700 rounded-2xl px-6 py-4 shadow-2xl transform group-hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center justify-center">
+                    <span className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                      Typist
+                    </span>
+                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-pulse shadow-lg"></div>
                   </div>
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-brand-600 font-bold text-xs">T</span>
-                </div>
+                
+                {/* Decorative elements */}
+                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-brand-300 rounded-full opacity-60"></div>
+                <div className="absolute -top-1 left-1/2 w-2 h-2 bg-brand-400 rounded-full opacity-40"></div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-brand-600 to-brand-700 bg-clip-text text-transparent">
-                  MyTypist
+              
+              {/* Tagline */}
+              <div className="text-center mt-4">
+                <span className="text-sm sm:text-base text-gray-600 font-medium">
+                  Professional Documents Made Simple
                 </span>
-                <span className="text-xs sm:text-sm text-gray-500 -mt-1">Professional Documents Made Simple</span>
               </div>
             </div>
           </div>
