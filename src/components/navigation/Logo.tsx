@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { PenNib, Crown } from 'lucide-react';
+import { Pen, Crown } from 'lucide-react';
 
 interface LogoProps {
   role: 'guest' | 'user' | 'admin';
@@ -11,7 +11,7 @@ const Logo = ({ role }: LogoProps) => {
     <Link to="/" className="flex items-center space-x-3 group">
       <div className="relative">
         <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg flex items-center justify-center bg-gray-800 text-white shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:bg-gray-700 group-hover:shadow-xl">
-          <PenNib className="w-5 h-5 sm:w-6 sm:h-6" />
+          <Pen className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
         
         {/* Admin crown indicator */}
