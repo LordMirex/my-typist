@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -13,14 +13,19 @@ import MobileMenu from './navigation/MobileMenu';
 const useAuth = () => {
   const [role, setRole] = useState<'guest' | 'user' | 'admin'>('guest');
   
-  const RoleDevSwitch = () => (
-    <div className="fixed bottom-4 right-4 z-50 bg-white border border-gray-200 p-2 px-4 rounded-lg shadow-lg space-x-2 text-xs hidden md:flex">
-      <span className="font-medium">Role:</span>
-      <button onClick={() => setRole('guest')} className={role==='guest' ? 'font-bold text-brand-600 underline' : 'text-gray-600 hover:text-brand-600'}>Guest</button>
-      <button onClick={() => setRole('user')} className={role==='user' ? 'font-bold text-brand-600 underline' : 'text-gray-600 hover:text-brand-600'}>User</button>
-      <button onClick={() => setRole('admin')} className={role==='admin' ? 'font-bold text-red-600 underline' : 'text-gray-600 hover:text-red-600'}>Admin</button>
-    </div>
-  );
+  // Only show role switcher in development
+  const RoleDevSwitch = () => {
+    if (process.env.NODE_ENV === 'production') return null;
+    
+    return (
+      <div className="fixed bottom-4 right-4 z-50 bg-white border border-gray-200 p-2 px-4 rounded-lg shadow-lg space-x-2 text-xs hidden md:flex">
+        <span className="font-medium">Role:</span>
+        <button onClick={() => setRole('guest')} className={role==='guest' ? 'font-bold text-brand-600 underline' : 'text-gray-600 hover:text-brand-600'}>Guest</button>
+        <button onClick={() => setRole('user')} className={role==='user' ? 'font-bold text-brand-600 underline' : 'text-gray-600 hover:text-brand-600'}>User</button>
+        <button onClick={() => setRole('admin')} className={role==='admin' ? 'font-bold text-red-600 underline' : 'text-gray-600 hover:text-red-600'}>Admin</button>
+      </div>
+    );
+  };
   return { role, setRole, RoleDevSwitch };
 };
 
@@ -31,8 +36,8 @@ const Navigation = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Close mobile menu when location changes
-  useState(() => {
+  // Close mobile menu when location changes - Fixed: use useEffect instead of useState
+  useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
