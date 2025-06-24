@@ -12,7 +12,21 @@ import FloatingRoleSwitcher from './FloatingRoleSwitcher';
 
 // Temporary (mock) user state, to be replaced with real auth
 const useAuth = () => {
-  const [role, setRole] = useState<'guest' | 'user' | 'admin'>('guest');
+  const [role, setRoleState] = useState<'guest' | 'user' | 'admin'>('guest');
+  
+  // Load role from localStorage on mount
+  useEffect(() => {
+    const savedRole = localStorage.getItem('testRole') as 'guest' | 'user' | 'admin';
+    if (savedRole && ['guest', 'user', 'admin'].includes(savedRole)) {
+      setRoleState(savedRole);
+    }
+  }, []);
+
+  // Save role to localStorage whenever it changes
+  const setRole = (newRole: 'guest' | 'user' | 'admin') => {
+    setRoleState(newRole);
+    localStorage.setItem('testRole', newRole);
+  };
   
   return { role, setRole };
 };
