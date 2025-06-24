@@ -23,12 +23,16 @@ const userNavItems = [
   { name: 'Templates', href: '/templates' },
   { name: 'Documents', href: '/create-document' },
   { name: 'Analytics', href: '/analytics' },
+  { name: 'Bonuses', href: '/bonuses' },
 ];
 
 const adminNavItems = [
-  { name: 'Admin Panel', href: '/admin' },
+  { name: 'Admin Dashboard', href: '/admin' },
   { name: 'User Management', href: '/admin/users' },
   { name: 'System Health', href: '/admin/health' },
+  { name: 'Admin Bonuses', href: '/admin/bonuses' },
+  { name: 'Document Preview', href: '/admin/preview' },
+  { name: 'Signature Management', href: '/admin/signatures' },
 ];
 
 const secondaryNavItems = [
@@ -69,6 +73,8 @@ const NavigationItems = ({ role }: NavigationItemsProps) => {
             isActive(item.href)
               ? role === 'admin' 
                 ? "text-red-600 bg-red-50" 
+                : role === 'user'
+                ? "text-brand-600 bg-brand-50"
                 : "text-brand-600 bg-brand-50"
               : "text-gray-700"
           )}
