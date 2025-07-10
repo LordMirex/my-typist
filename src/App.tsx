@@ -39,10 +39,10 @@ const Settings = lazy(() => import("./pages/Settings"));
 const Bonuses = lazy(() => import("./pages/Bonuses"));
 const Analytics = lazy(() => import("./pages/Analytics"));
 
-// Optimized loading component with semantic tokens
+// Optimized loading component with semantic tokens and preload hint
 const LoadingSpinner = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary border-t-transparent"></div>
   </div>
 );
 
