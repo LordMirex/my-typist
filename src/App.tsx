@@ -8,9 +8,11 @@ import { Suspense, lazy } from "react";
 
 // Import critical pages directly (no lazy loading)
 import Index from "./pages/Index";
-import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+
+// Lazy load dashboard and other pages for better initial load
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 // Keep lazy loading for less critical pages
 const About = lazy(() => import("./pages/About"));
@@ -23,6 +25,11 @@ const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const Templates = lazy(() => import("./pages/Templates"));
 const CreateDocument = lazy(() => import("./pages/CreateDocument"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AdminUsers = lazy(() => import("./pages/AdminUsers"));
+const AdminHealth = lazy(() => import("./pages/AdminHealth"));
+const AdminBonuses = lazy(() => import("./pages/AdminBonuses"));
+const AdminPreview = lazy(() => import("./pages/AdminPreview"));
+const AdminUploadTemplate = lazy(() => import("./pages/AdminUploadTemplate"));
 const Profile = lazy(() => import("./pages/Profile"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const BecomePartner = lazy(() => import("./pages/BecomePartner"));
@@ -31,12 +38,11 @@ const Support = lazy(() => import("./pages/Support"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Bonuses = lazy(() => import("./pages/Bonuses"));
 const Analytics = lazy(() => import("./pages/Analytics"));
-const AdminUploadTemplate = lazy(() => import("./pages/AdminUploadTemplate"));
 
-// Simplified loading component
+// Optimized loading component with semantic tokens
 const LoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600"></div>
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
   </div>
 );
 
@@ -71,6 +77,10 @@ const App = () => (
               <Route path="/templates" element={<Templates />} />
               <Route path="/create-document" element={<CreateDocument />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/health" element={<AdminHealth />} />
+              <Route path="/admin/bonuses" element={<AdminBonuses />} />
+              <Route path="/admin/preview" element={<AdminPreview />} />
               <Route path="/admin/upload-template" element={<AdminUploadTemplate />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/become-partner" element={<BecomePartner />} />
