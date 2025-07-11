@@ -45,8 +45,8 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+        <div className="section-container">
           <div className="flex justify-between items-center h-16 lg:h-20">
             <Logo role={role} />
             
@@ -57,13 +57,13 @@ const Navigation = () => {
               <AuthButtons role={role} />
             </div>
 
-            {/* Mobile menu button */}
+            {/* Enhanced mobile menu button */}
             <div className="lg:hidden">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-brand-600 p-2"
+                className="text-foreground hover:text-primary p-2 hover:bg-muted transition-all duration-200"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

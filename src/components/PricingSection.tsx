@@ -63,68 +63,72 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+    <section className="section-spacing bg-gradient-to-b from-muted/10 to-background">
+      <div className="section-container">
+        {/* Enhanced Section Header */}
+        <div className="text-center mb-20 animate-fade-in">
+          <div className="inline-flex items-center px-4 py-2 bg-green-500/10 rounded-full text-sm font-semibold text-green-600 mb-6">
+            💰 Transparent Pricing
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
             Simple, Transparent{' '}
             <span className="gradient-text">Pricing</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose the perfect plan for your business. Start free and upgrade as you grow.
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            Choose the perfect plan for your business. Start free and upgrade as you grow. 
+            All plans include our enterprise-grade security and support.
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Enhanced Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={plan.name}
-              className={`relative hover:shadow-xl transition-all duration-300 ${
+              className={`relative hover-lift transition-all duration-300 animate-fade-in ${
                 plan.popular 
-                  ? 'border-brand-500 shadow-lg scale-105' 
-                  : 'border-gray-200 hover:scale-105'
+                  ? 'border-2 border-primary shadow-xl scale-105 hover-glow' 
+                  : 'card-elegant hover:border-primary/20'
               }`}
               style={{ animationDelay: `${index * 150}ms` }}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
-                    <Star className="w-4 h-4 mr-1" />
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                  <div className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
+                    <Star className="w-4 h-4 mr-2 fill-current" />
                     Most Popular
                   </div>
                 </div>
               )}
 
-              <CardHeader className="text-center pb-8 pt-8">
-                <h3 className={`text-2xl font-bold ${plan.popular ? 'text-brand-600' : 'text-gray-900'}`}>
+              <CardHeader className="text-center pb-6 pt-10">
+                <h3 className={`text-3xl font-bold mb-2 ${plan.popular ? 'text-primary' : 'text-foreground'}`}>
                   {plan.name}
                 </h3>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                  <span className="text-gray-500 ml-1">/{plan.period}</span>
+                <div className="mt-4 mb-4">
+                  <span className={`text-5xl font-bold ${plan.popular ? 'gradient-text' : 'text-foreground'}`}>
+                    {plan.price}
+                  </span>
+                  <span className="text-muted-foreground ml-2 text-lg">/{plan.period}</span>
                 </div>
-                <p className="text-gray-600 mt-2">{plan.description}</p>
+                <p className="text-muted-foreground text-base font-medium">{plan.description}</p>
               </CardHeader>
 
               <CardContent className="px-8 pb-8">
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                    <li key={featureIndex} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link to={plan.href} className="block">
                   <Button 
-                    className={`w-full py-3 ${
-                      plan.popular 
-                        ? 'bg-brand-600 hover:bg-brand-700 text-white' 
-                        : 'bg-white hover:bg-gray-50 text-gray-900 border border-gray-300'
-                    }`}
+                    variant={plan.popular ? "gradient" : "outline"}
+                    size="lg"
+                    className="w-full font-bold"
                   >
                     {plan.cta}
                   </Button>
@@ -134,13 +138,16 @@ const PricingSection = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray-600">
-            All plans include a 14-day free trial. No credit card required.{' '}
-            <Link to="/pricing" className="text-brand-600 hover:text-brand-700 font-medium">
-              View detailed comparison →
+        <div className="text-center mt-16 animate-fade-in">
+          <div className="card-elegant p-6 max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg font-medium mb-2">
+              All plans include a 14-day free trial. No credit card required.{' '}
+            </p>
+            <Link to="/pricing" className="text-primary hover:text-primary-glow font-bold inline-flex items-center group transition-colors">
+              View detailed comparison 
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </section>

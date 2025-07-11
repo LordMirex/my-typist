@@ -43,38 +43,41 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+    <section className="section-spacing bg-gradient-to-b from-background to-muted/20">
+      <div className="section-container">
+        {/* Enhanced Section Header */}
+        <div className="text-center mb-20 animate-fade-in">
+          <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-sm font-semibold text-primary mb-6">
+            ✨ Powerful Features
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
             Everything You Need to{' '}
             <span className="gradient-text">Streamline Documents</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             From creation to signature, MyTypist handles your entire document workflow 
             with enterprise-grade security and lightning-fast performance.
           </p>
         </div>
 
-        {/* Features Grid */}
+        {/* Enhanced Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Card 
               key={feature.title} 
-              className="hover:shadow-lg transition-all duration-300 border-0 shadow-md group hover:scale-105"
+              className="card-elegant hover-lift hover-glow transition-all duration-300 group animate-fade-in border-0"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <CardContent className="p-8">
-                <div className="mb-4">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-50 transition-colors">
-                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:from-primary/20 group-hover:to-primary/30 transition-all duration-300">
+                    <feature.icon className={`w-8 h-8 ${feature.color} group-hover:scale-110 transition-transform duration-300`} />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </CardContent>
