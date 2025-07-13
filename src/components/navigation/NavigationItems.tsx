@@ -69,21 +69,21 @@ const NavigationItems = ({ role }: NavigationItemsProps) => {
           key={item.name}
           to={item.href}
           className={cn(
-            "text-base font-semibold transition-[var(--transition-smooth)] hover:text-primary relative px-4 py-2 rounded-lg hover-lift",
+            "text-sm font-medium transition-colors hover:text-brand-600 relative px-2 py-1 rounded-md",
             isActive(item.href)
               ? role === 'admin' 
-                ? "text-destructive bg-destructive/10" 
+                ? "text-red-600 bg-red-50" 
                 : role === 'user'
-                ? "text-primary bg-primary/10"
-                : "text-primary bg-primary/10"
-              : "text-foreground"
+                ? "text-brand-600 bg-brand-50"
+                : "text-brand-600 bg-brand-50"
+              : "text-gray-700"
           )}
         >
           {item.name}
           {isActive(item.href) && (
             <div className={cn(
-              "absolute -bottom-1 left-0 w-full h-1 rounded-full",
-              role === 'admin' ? "bg-destructive" : "bg-primary"
+              "absolute -bottom-2 left-0 w-full h-0.5 rounded-full",
+              role === 'admin' ? "bg-red-600" : "bg-brand-600"
             )} />
           )}
         </Link>
@@ -93,12 +93,12 @@ const NavigationItems = ({ role }: NavigationItemsProps) => {
       {role === 'guest' && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-foreground hover:text-primary font-semibold hover-lift">
+            <Button variant="ghost" size="sm" className="text-gray-700 hover:text-brand-600">
               More
               <ChevronDown className="ml-1 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-52 glass-effect shadow-[var(--shadow-medium)] border border-border/50">
+          <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg border border-gray-200">
             {secondaryNavItems.map((item) => (
               <DropdownMenuItem key={item.name} asChild>
                 <Link

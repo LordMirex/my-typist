@@ -63,66 +63,68 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-gradient-to-br from-muted/20 via-background to-primary/5">
-      <div className="container-wide">
-        {/* Enhanced Section Header */}
-        <div className="text-center mb-20 animate-fade-in-up">
-          <h2 className="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Simple, Transparent{' '}
-            <span className="text-gradient-primary">Pricing</span>
+            <span className="gradient-text">Pricing</span>
           </h2>
-          <p className="text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Choose the perfect plan for your business. Start free and upgrade as you grow.
           </p>
         </div>
 
-        {/* Enhanced Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={plan.name}
-              className={`relative card-elevated hover-lift group animate-scale-in ${
+              className={`relative hover:shadow-xl transition-all duration-300 ${
                 plan.popular 
-                  ? 'border-primary/20 shadow-[var(--shadow-large)] scale-105' 
-                  : 'border-border/20'
+                  ? 'border-brand-500 shadow-lg scale-105' 
+                  : 'border-gray-200 hover:scale-105'
               }`}
-              style={{ animationDelay: `${index * 200}ms` }}
+              style={{ animationDelay: `${index * 150}ms` }}
             >
               {plan.popular && (
-                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                  <div className="btn-gradient px-6 py-3 rounded-full text-sm font-bold flex items-center shadow-[var(--shadow-medium)]">
-                    <Star className="w-4 h-4 mr-2 text-primary-foreground" />
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
+                    <Star className="w-4 h-4 mr-1" />
                     Most Popular
                   </div>
                 </div>
               )}
 
-              <CardHeader className="text-center pb-8 pt-10">
-                <h3 className={`text-3xl font-bold mb-2 ${plan.popular ? 'text-gradient-primary' : 'text-foreground'}`}>
+              <CardHeader className="text-center pb-8 pt-8">
+                <h3 className={`text-2xl font-bold ${plan.popular ? 'text-brand-600' : 'text-gray-900'}`}>
                   {plan.name}
                 </h3>
-                <div className="mt-6">
-                  <span className="text-5xl font-bold text-gradient-primary">{plan.price}</span>
-                  <span className="text-muted-foreground ml-2 text-lg">/{plan.period}</span>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                  <span className="text-gray-500 ml-1">/{plan.period}</span>
                 </div>
-                <p className="text-muted-foreground mt-4 text-lg">{plan.description}</p>
+                <p className="text-gray-600 mt-2">{plan.description}</p>
               </CardHeader>
 
-              <CardContent className="px-10 pb-10">
-                <ul className="space-y-5 mb-10">
+              <CardContent className="px-8 pb-8">
+                <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center">
-                      <CheckCircle className="w-6 h-6 text-accent mr-4 flex-shrink-0" />
-                      <span className="text-foreground text-lg">{feature}</span>
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                      <span className="text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link to={plan.href} className="block">
                   <Button 
-                    variant={plan.popular ? 'gradient' : 'outline'}
-                    size="lg"
-                    className="w-full"
+                    className={`w-full py-3 ${
+                      plan.popular 
+                        ? 'bg-brand-600 hover:bg-brand-700 text-white' 
+                        : 'bg-white hover:bg-gray-50 text-gray-900 border border-gray-300'
+                    }`}
                   >
                     {plan.cta}
                   </Button>
@@ -132,10 +134,10 @@ const PricingSection = () => {
           ))}
         </div>
 
-        <div className="text-center mt-16 animate-fade-in">
-          <p className="text-muted-foreground text-lg">
+        <div className="text-center mt-12">
+          <p className="text-gray-600">
             All plans include a 14-day free trial. No credit card required.{' '}
-            <Link to="/pricing" className="text-gradient-primary hover:text-gradient-accent font-semibold hover-lift inline-block">
+            <Link to="/pricing" className="text-brand-600 hover:text-brand-700 font-medium">
               View detailed comparison →
             </Link>
           </p>
