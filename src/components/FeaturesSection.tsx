@@ -8,73 +8,73 @@ const FeaturesSection = () => {
       icon: FileText,
       title: 'AutoType Documents',
       description: 'Create professional documents instantly with our intelligent automation tools and pre-built templates.',
-      color: 'text-brand-600'
+      gradient: 'text-gradient-primary'
     },
     {
       icon: PenTool,
       title: 'AutoSign E-Signatures',
       description: 'Get documents signed quickly with legally binding e-signatures that comply with global standards.',
-      color: 'text-blue-600'
+      gradient: 'text-gradient-accent'
     },
     {
       icon: Clock,
       title: 'Save Hours Daily',
       description: 'Reduce document processing time by 90% with smart automation and streamlined workflows.',
-      color: 'text-green-600'
+      gradient: 'text-gradient-primary'
     },
     {
       icon: Shield,
       title: 'Enterprise Security',
       description: 'Bank-level encryption and compliance with GDPR, HIPAA, and SOC 2 standards.',
-      color: 'text-purple-600'
+      gradient: 'text-gradient-accent'
     },
     {
       icon: Users,
       title: 'Team Collaboration',
       description: 'Work together seamlessly with real-time collaboration and role-based permissions.',
-      color: 'text-orange-600'
+      gradient: 'text-gradient-primary'
     },
     {
       icon: Zap,
       title: 'Instant Integration',
       description: 'Connect with Google Drive, Dropbox, and other tools you already use daily.',
-      color: 'text-yellow-600'
+      gradient: 'text-gradient-accent'
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+    <section className="section-padding bg-gradient-to-br from-background via-muted/30 to-accent/5">
+      <div className="container-wide">
+        {/* Enhanced Section Header */}
+        <div className="text-center mb-20 animate-fade-in-up">
+          <h2 className="text-4xl lg:text-6xl font-bold text-foreground mb-6">
             Everything You Need to{' '}
-            <span className="gradient-text">Streamline Documents</span>
+            <span className="text-gradient-primary">Streamline Documents</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             From creation to signature, MyTypist handles your entire document workflow 
             with enterprise-grade security and lightning-fast performance.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Enhanced Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature, index) => (
             <Card 
               key={feature.title} 
-              className="hover:shadow-lg transition-all duration-300 border-0 shadow-md group hover:scale-105"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="card-elevated hover-lift group animate-fade-in border-0"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              <CardContent className="p-8">
-                <div className="mb-4">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-50 transition-colors">
-                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
+              <CardContent className="p-10">
+                <div className="mb-6">
+                  <div className="w-16 h-16 btn-gradient rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-[var(--transition-smooth)] shadow-[var(--shadow-medium)]">
+                    <feature.icon className="w-8 h-8 text-primary-foreground" />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className={`text-2xl font-bold mb-4 ${feature.gradient}`}>
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed text-lg">
                   {feature.description}
                 </p>
               </CardContent>

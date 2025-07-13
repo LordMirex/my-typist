@@ -8,26 +8,26 @@ interface LogoProps {
 
 const Logo = ({ role }: LogoProps) => {
   return (
-    <Link to="/" className="flex items-center space-x-3 group">
+    <Link to="/" className="flex items-center space-x-4 group">
       <div className="relative">
-        {/* Enhanced logo icon with gradient background */}
-        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-brand-600 to-blue-600 text-white shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:from-brand-700 group-hover:to-blue-700">
-          <FileText className="w-6 h-6 sm:w-7 sm:h-7" />
+        {/* Premium logo icon with enhanced gradient */}
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center btn-gradient shadow-[var(--shadow-medium)] group-hover:scale-110 group-hover:shadow-[var(--shadow-large)] transition-[var(--transition-smooth)]">
+          <FileText className="w-7 h-7 sm:w-8 sm:h-8 text-primary-foreground" />
         </div>
         
         {/* Enhanced admin crown indicator */}
         {role === "admin" && (
-          <div className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
-            <Crown className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white" />
+          <div className="absolute -top-2 -right-2 w-6 h-6 sm:w-7 sm:h-7 bg-destructive rounded-full flex items-center justify-center shadow-[var(--shadow-medium)] animate-bounce-gentle">
+            <Crown className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-destructive-foreground" />
           </div>
         )}
       </div>
       
       <div className="flex flex-col">
-        <span className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight group-hover:text-brand-600 transition-colors duration-300">
+        <span className="text-xl sm:text-2xl font-bold text-gradient-primary tracking-tight group-hover:scale-105 transition-[var(--transition-smooth)]">
           MyTypist
         </span>
-        <span className="text-xs text-gray-500 -mt-1 font-medium tracking-wide group-hover:text-brand-500 transition-colors duration-300">
+        <span className="text-xs text-muted-foreground -mt-1 font-semibold tracking-wide group-hover:text-gradient-accent transition-[var(--transition-smooth)]">
           Document Automation
         </span>
       </div>
