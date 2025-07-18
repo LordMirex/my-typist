@@ -5,7 +5,7 @@ import { CheckCircle, ArrowRight, FileText, Zap, Shield, Play, Star } from 'luci
 
 const HeroSection = () => {
   return (
-    <section className="relative py-20 lg:py-32 bg-gradient-to-br from-muted/30 via-background to-muted/30 overflow-hidden">
+    <section className="relative hero-height flex items-center bg-gradient-to-br from-muted/30 via-background to-muted/30 overflow-hidden will-change-transform">
       {/* Optimized background decorations */}
       <div className="absolute inset-0 opacity-60">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl"></div>

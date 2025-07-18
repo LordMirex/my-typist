@@ -9,12 +9,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="flex items-center space-x-1">
-                <FileText className="h-8 w-8 text-brand-400" />
-                <PenTool className="h-6 w-6 text-brand-300" />
+            <Link to="/" className="flex items-center space-x-3 mb-4 group">
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+                <FileText className="w-6 h-6" />
               </div>
-              <span className="text-xl font-bold">MyTypist</span>
+              <div className="flex items-center">
+                <span className="text-xl font-bold text-yellow-400">My</span>
+                <span className="text-xl font-bold text-white">Typist</span>
+              </div>
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
               Fast document automation and e-signatures for businesses of all sizes. 

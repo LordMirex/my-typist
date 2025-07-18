@@ -8,10 +8,10 @@ interface LogoProps {
 
 const Logo = ({ role }: LogoProps) => {
   return (
-    <Link to="/" className="flex items-center space-x-3 group">
+    <Link to="/" className="flex items-center space-x-3 group will-change-transform">
       <div className="relative">
-        {/* Enhanced logo icon with gradient background */}
-        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-brand-600 to-blue-600 text-white shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:from-brand-700 group-hover:to-blue-700">
+        {/* Professional logo icon with improved gradient */}
+        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-brand-primary to-brand-accent text-white shadow-lg shadow-primary/20 transform transition-all duration-200 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-primary/30">
           <FileText className="w-6 h-6 sm:w-7 sm:h-7" />
         </div>
         
@@ -24,10 +24,15 @@ const Logo = ({ role }: LogoProps) => {
       </div>
       
       <div className="flex flex-col">
-        <span className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight group-hover:text-brand-600 transition-colors duration-300">
-          MyTypist
-        </span>
-        <span className="text-xs text-gray-500 -mt-1 font-medium tracking-wide group-hover:text-brand-500 transition-colors duration-300">
+        <div className="flex items-center">
+          <span className="text-xl sm:text-2xl font-bold text-brand-secondary tracking-tight group-hover:text-brand-primary transition-colors duration-200">
+            My
+          </span>
+          <span className="text-xl sm:text-2xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors duration-200">
+            Typist
+          </span>
+        </div>
+        <span className="text-xs text-muted-foreground -mt-1 font-medium tracking-wide group-hover:text-primary transition-colors duration-200">
           Document Automation
         </span>
       </div>

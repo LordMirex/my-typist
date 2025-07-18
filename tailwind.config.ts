@@ -74,6 +74,9 @@ export default {
 					700: '#0369a1',
 					800: '#075985',
 					900: '#0c4a6e',
+					primary: 'hsl(var(--brand-primary))',
+					secondary: 'hsl(var(--brand-secondary))',
+					accent: 'hsl(var(--brand-accent))',
 				}
 			},
 			borderRadius: {
@@ -122,8 +125,8 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.3s ease-out',
-				'slide-in': 'slide-in 0.2s ease-out'
+				'fade-in': 'fade-in 0.15s ease-out',
+				'slide-in': 'slide-in 0.1s ease-out'
 			}
 		}
 	},

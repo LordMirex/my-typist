@@ -1,22 +1,67 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { FileText, Zap, BookOpen, Mail, Users, Scale, CreditCard } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import NavigationDropdown from './NavigationDropdown';
 
-const guestNavItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'How to Use', href: '/how-to-use' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'Blog', href: '/blog' },
-];
+// Guest navigation structure as requested
+const guestDropdownItems = {
+  products: [
+    { 
+      name: 'AutoSign', 
+      href: '/autosign', 
+      description: 'Automated digital signature workflows',
+      icon: <FileText className="h-5 w-5" />
+    },
+    { 
+      name: 'AutoType', 
+      href: '/autotype', 
+      description: 'AI-powered document generation',
+      icon: <Zap className="h-5 w-5" />
+    },
+  ],
+  resources: [
+    { 
+      name: 'How to Use', 
+      href: '/how-to-use', 
+      description: 'Learn to maximize MyTypist features',
+      icon: <BookOpen className="h-5 w-5" />
+    },
+    { 
+      name: 'Blog', 
+      href: '/blog', 
+      description: 'Latest insights and best practices',
+      icon: <BookOpen className="h-5 w-5" />
+    },
+    { 
+      name: 'About', 
+      href: '/about', 
+      description: 'Our mission and company story',
+      icon: <Users className="h-5 w-5" />
+    },
+  ],
+  company: [
+    { 
+      name: 'Contact Us', 
+      href: '/contact', 
+      description: 'Get in touch with our team',
+      icon: <Mail className="h-5 w-5" />
+    },
+    { 
+      name: 'Become a Partner', 
+      href: '/become-partner', 
+      description: 'Join our partner program',
+      icon: <Users className="h-5 w-5" />
+    },
+    { 
+      name: 'Legals', 
+      href: '/legals', 
+      description: 'Privacy policy and terms of service',
+      icon: <Scale className="h-5 w-5" />
+    },
+  ],
+};
 
 const userNavItems = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -35,13 +80,6 @@ const adminNavItems = [
   { name: 'Signature Management', href: '/admin/signatures' },
 ];
 
-const secondaryNavItems = [
-  { name: 'Contact', href: '/contact' },
-  { name: 'Become a Partner', href: '/become-partner' },
-  { name: 'Support', href: '/support' },
-  { name: 'Legals', href: '/legals' }
-];
-
 interface NavigationItemsProps {
   role: 'guest' | 'user' | 'admin';
 }
@@ -50,6 +88,49 @@ const NavigationItems = ({ role }: NavigationItemsProps) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
 
+  if (role === 'guest') {
+    return (
+      <div className="hidden lg:flex items-center space-x-8">
+        <Link
+          to="/"
+          className={cn(
+            "text-sm font-medium transition-colors hover:text-primary relative px-3 py-2 rounded-md",
+            isActive('/') ? "text-primary bg-primary/10" : "text-foreground"
+          )}
+        >
+          Home
+        </Link>
+
+        <NavigationDropdown
+          title="Products"
+          items={guestDropdownItems.products}
+        />
+
+        <NavigationDropdown
+          title="Resources"
+          items={guestDropdownItems.resources}
+        />
+
+        <NavigationDropdown
+          title="Company"
+          items={guestDropdownItems.company}
+        />
+
+        <Link
+          to="/pricing"
+          className={cn(
+            "text-sm font-medium transition-colors hover:text-primary relative px-3 py-2 rounded-md",
+            isActive('/pricing') ? "text-primary bg-primary/10" : "text-foreground"
+          )}
+        >
+          <CreditCard className="inline h-4 w-4 mr-1" />
+          Plans and Pricing
+        </Link>
+      </div>
+    );
+  }
+
+  // User and Admin navigation (existing logic)
   let primaryNavItems;
   switch (role) {
     case 'admin':
@@ -59,7 +140,7 @@ const NavigationItems = ({ role }: NavigationItemsProps) => {
       primaryNavItems = userNavItems;
       break;
     default:
-      primaryNavItems = guestNavItems;
+      primaryNavItems = [];
   }
 
   return (
@@ -69,52 +150,17 @@ const NavigationItems = ({ role }: NavigationItemsProps) => {
           key={item.name}
           to={item.href}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-brand-600 relative px-2 py-1 rounded-md",
+            "text-sm font-medium transition-colors hover:text-primary relative px-3 py-2 rounded-md",
             isActive(item.href)
               ? role === 'admin' 
                 ? "text-red-600 bg-red-50" 
-                : role === 'user'
-                ? "text-brand-600 bg-brand-50"
-                : "text-brand-600 bg-brand-50"
-              : "text-gray-700"
+                : "text-primary bg-primary/10"
+              : "text-foreground"
           )}
         >
           {item.name}
-          {isActive(item.href) && (
-            <div className={cn(
-              "absolute -bottom-2 left-0 w-full h-0.5 rounded-full",
-              role === 'admin' ? "bg-red-600" : "bg-brand-600"
-            )} />
-          )}
         </Link>
       ))}
-
-      {/* More Menu - only for guests */}
-      {role === 'guest' && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-gray-700 hover:text-brand-600">
-              More
-              <ChevronDown className="ml-1 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg border border-gray-200">
-            {secondaryNavItems.map((item) => (
-              <DropdownMenuItem key={item.name} asChild>
-                <Link
-                  to={item.href}
-                  className={cn(
-                    "w-full cursor-pointer",
-                    isActive(item.href) ? "text-brand-600 bg-brand-50" : ""
-                  )}
-                >
-                  {item.name}
-                </Link>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
     </div>
   );
 };

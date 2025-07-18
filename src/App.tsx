@@ -54,6 +54,10 @@ const queryClient = new QueryClient({
   },
 });
 
+// Lazy load new product pages
+const AutoSign = lazy(() => import("./pages/AutoSign"));
+const AutoType = lazy(() => import("./pages/AutoType"));
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -76,6 +80,8 @@ const App = () => (
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/templates" element={<Templates />} />
               <Route path="/create-document" element={<CreateDocument />} />
+              <Route path="/autosign" element={<AutoSign />} />
+              <Route path="/autotype" element={<AutoType />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin/health" element={<AdminHealth />} />

@@ -33,6 +33,11 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Brand colors for improved logo design */
+    --brand-primary: 210 100% 50%;
+    --brand-secondary: 32 95% 44%;
+    --brand-accent: 197 71% 73%;
   }
 
   .dark {
@@ -72,26 +77,42 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.5;
   }
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Performance optimizations */
+  img {
+    @apply max-w-full h-auto;
+    content-visibility: auto;
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer utilities {
-  /* Essential animations only */
+  /* Optimized animations - faster and smoother */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.15s ease-out;
   }
   
   .animate-slide-in {
-    animation: slideIn 0.2s ease-out;
+    animation: slideIn 0.1s ease-out;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
@@ -102,7 +123,7 @@
   @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translateX(-10px);
+      transform: translateX(-8px);
     }
     to {
       opacity: 1;
@@ -110,17 +131,32 @@
     }
   }
 
+  /* Hero section height utilities */
+  .hero-height {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
   /* Focus styles */
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
   }
 
-  /* Interactive elements */
+  /* Interactive elements - optimized */
   .interactive {
-    transition: all 0.2s ease;
+    transition: transform 0.1s ease, opacity 0.1s ease;
   }
 
   .interactive:hover {
     transform: translateY(-1px);
+  }
+  
+  /* Performance hints */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
   }
 }

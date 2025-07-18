@@ -4,12 +4,19 @@ import { Button } from '@/components/ui/button';
 import { User, LogOut, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const guestNavItems = [
+// Mobile navigation structure (simplified for mobile)
+const guestMobileNavItems = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
+  { name: 'AutoSign', href: '/autosign' },
+  { name: 'AutoType', href: '/autotype' },
   { name: 'How to Use', href: '/how-to-use' },
-  { name: 'Pricing', href: '/pricing' },
   { name: 'Blog', href: '/blog' },
+  { name: 'About', href: '/about' },
+  { name: 'Pricing', href: '/pricing' },
+  { name: 'Contact Us', href: '/contact' },
+  { name: 'Become a Partner', href: '/become-partner' },
+  { name: 'Support', href: '/support' },
+  { name: 'Legals', href: '/legals' },
 ];
 
 const userNavItems = [
@@ -27,13 +34,6 @@ const adminNavItems = [
   { name: 'Admin Bonuses', href: '/admin/bonuses' },
   { name: 'Document Preview', href: '/admin/preview' },
   { name: 'Signature Management', href: '/admin/signatures' },
-];
-
-const secondaryNavItems = [
-  { name: 'Contact', href: '/contact' },
-  { name: 'Become a Partner', href: '/become-partner' },
-  { name: 'Support', href: '/support' },
-  { name: 'Legals', href: '/legals' }
 ];
 
 interface MobileMenuProps {
@@ -55,12 +55,12 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, role, isActive }: MobileMenuPro
       primaryNavItems = userNavItems;
       break;
     default:
-      primaryNavItems = guestNavItems;
+      primaryNavItems = guestMobileNavItems;
   }
 
   return (
     <div className="lg:hidden animate-fade-in">
-      <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg">
+      <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border shadow-lg">
         {/* Primary Nav Items */}
         <div className="space-y-1">
           {primaryNavItems.map((item) => (
@@ -72,8 +72,8 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, role, isActive }: MobileMenuPro
                 isActive(item.href)
                   ? role === 'admin'
                     ? "text-red-600 bg-red-50"
-                    : "text-brand-600 bg-brand-50"
-                  : "text-gray-700 hover:text-brand-600 hover:bg-gray-50"
+                    : "text-primary bg-primary/10"
+                  : "text-foreground hover:text-primary hover:bg-muted"
               )}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -82,32 +82,8 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, role, isActive }: MobileMenuPro
           ))}
         </div>
 
-        {/* Secondary Nav Items for Guests Only */}
-        {role === 'guest' && (
-          <div className="pt-4 border-t border-gray-200">
-            <div className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2 px-3">
-              More
-            </div>
-            {secondaryNavItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  "block px-3 py-2 text-base font-medium transition-colors rounded-md",
-                  isActive(item.href)
-                    ? "text-brand-600 bg-brand-50"
-                    : "text-gray-700 hover:text-brand-600 hover:bg-gray-50"
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-
         {/* Auth Buttons */}
-        <div className="pt-4 border-t border-gray-200 space-y-2 px-3">
+        <div className="pt-4 border-t border-border space-y-2 px-3">
           {role === "guest" && (
             <>
               <Link to="/login" onClick={() => setIsMenuOpen(false)} className="block">
@@ -116,7 +92,7 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, role, isActive }: MobileMenuPro
                 </Button>
               </Link>
               <Link to="/signup" onClick={() => setIsMenuOpen(false)} className="block">
-                <Button size="sm" className="w-full bg-brand-600 hover:bg-brand-700">
+                <Button size="sm" className="w-full">
                   Get Started Free
                 </Button>
               </Link>
@@ -144,7 +120,7 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, role, isActive }: MobileMenuPro
                   </Button>
                 </Link>
               )}
-              <Button variant="ghost" size="sm" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50">
+              <Button variant="ghost" size="sm" className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10">
                 <LogOut className="w-4 h-4 mr-2" />
                 Sign Out
               </Button>
