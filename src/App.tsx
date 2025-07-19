@@ -20,6 +20,7 @@ const Pricing = lazy(() => import("./pages/Pricing"));
 const Contact = lazy(() => import("./pages/Contact"));
 const HowToUse = lazy(() => import("./pages/HowToUse"));
 const Blog = lazy(() => import("./pages/Blog"));
+const Article = lazy(() => import("./pages/Article"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const Templates = lazy(() => import("./pages/Templates"));
@@ -76,6 +77,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/how-to-use" element={<HowToUse />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<Article />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/templates" element={<Templates />} />

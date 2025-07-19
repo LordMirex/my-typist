@@ -12,7 +12,7 @@ const Layout = ({ children, showFooter = true }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
-      <main className="flex-1">
+      <main className="flex-1 pt-16 lg:pt-20">
         {children}
       </main>
       {showFooter && <Footer />}

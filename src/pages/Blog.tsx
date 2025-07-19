@@ -1,10 +1,14 @@
 
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 
 const Blog = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  
   const articles = [
     {
       id: 1,
@@ -69,6 +73,10 @@ const Blog = () => {
   ];
 
   const categories = ['All', 'Industry Insights', 'Legal', 'Case Study', 'Security', 'Tips & Tricks', 'How-to'];
+  
+  const filteredArticles = selectedCategory === 'All' 
+    ? articles 
+    : articles.filter(article => article.category === selectedCategory);
 
   return (
     <Layout>
@@ -94,8 +102,9 @@ const Blog = () => {
               {categories.map((category) => (
                 <Badge 
                   key={category}
-                  variant={category === 'All' ? 'default' : 'secondary'}
-                  className="cursor-pointer hover:bg-brand-100 hover:text-brand-800 px-4 py-2"
+                  variant={selectedCategory === category ? 'default' : 'secondary'}
+                  className="cursor-pointer hover:bg-brand-100 hover:text-brand-800 px-4 py-2 transition-colors"
+                  onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </Badge>
@@ -103,12 +112,10 @@ const Blog = () => {
             </div>
 
             {/* Featured Article */}
-            {articles.filter(article => article.featured).map((article) => (
-              <Card 
-                key={article.id}
-                className="mb-12 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-              >
-                <CardContent className="p-8">
+            {filteredArticles.filter(article => article.featured).map((article) => (
+              <Link key={article.id} to={`/blog/${article.id}`}>
+                <Card className="mb-12 hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                  <CardContent className="p-8">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div>
                       <Badge className="mb-4 bg-brand-600">Featured</Badge>
@@ -143,17 +150,18 @@ const Blog = () => {
                   </div>
                 </CardContent>
               </Card>
+              </Link>
             ))}
 
             {/* Articles Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {articles.filter(article => !article.featured).map((article, index) => (
-                <Card 
-                  key={article.id}
-                  className="hover:shadow-xl transition-all duration-300 cursor-pointer group hover:scale-105"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <CardContent className="p-6">
+              {filteredArticles.filter(article => !article.featured).map((article, index) => (
+                <Link key={article.id} to={`/blog/${article.id}`}>
+                  <Card 
+                    className="hover:shadow-xl transition-all duration-300 cursor-pointer group hover:scale-105"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <CardContent className="p-6">
                     <div className="bg-gradient-to-br from-gray-100 to-gray-50 rounded-lg aspect-video mb-6 flex items-center justify-center">
                       <div className="text-center">
                         <div className="text-3xl mb-2">📝</div>
@@ -190,6 +198,7 @@ const Blog = () => {
                     </div>
                   </CardContent>
                 </Card>
+                </Link>
               ))}
             </div>
 

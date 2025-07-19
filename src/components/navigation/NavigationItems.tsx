@@ -1,84 +1,7 @@
-
 import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { FileText, Zap, BookOpen, Mail, Users, Scale, CreditCard } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import NavigationDropdown from './NavigationDropdown';
-
-// Guest navigation structure as requested
-const guestDropdownItems = {
-  products: [
-    { 
-      name: 'AutoSign', 
-      href: '/autosign', 
-      description: 'Automated digital signature workflows',
-      icon: <FileText className="h-5 w-5" />
-    },
-    { 
-      name: 'AutoType', 
-      href: '/autotype', 
-      description: 'AI-powered document generation',
-      icon: <Zap className="h-5 w-5" />
-    },
-  ],
-  resources: [
-    { 
-      name: 'How to Use', 
-      href: '/how-to-use', 
-      description: 'Learn to maximize MyTypist features',
-      icon: <BookOpen className="h-5 w-5" />
-    },
-    { 
-      name: 'Blog', 
-      href: '/blog', 
-      description: 'Latest insights and best practices',
-      icon: <BookOpen className="h-5 w-5" />
-    },
-    { 
-      name: 'About', 
-      href: '/about', 
-      description: 'Our mission and company story',
-      icon: <Users className="h-5 w-5" />
-    },
-  ],
-  company: [
-    { 
-      name: 'Contact Us', 
-      href: '/contact', 
-      description: 'Get in touch with our team',
-      icon: <Mail className="h-5 w-5" />
-    },
-    { 
-      name: 'Become a Partner', 
-      href: '/become-partner', 
-      description: 'Join our partner program',
-      icon: <Users className="h-5 w-5" />
-    },
-    { 
-      name: 'Legals', 
-      href: '/legals', 
-      description: 'Privacy policy and terms of service',
-      icon: <Scale className="h-5 w-5" />
-    },
-  ],
-};
-
-const userNavItems = [
-  { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Templates', href: '/templates' },
-  { name: 'Documents', href: '/create-document' },
-  { name: 'Analytics', href: '/analytics' },
-  { name: 'Bonuses', href: '/bonuses' },
-];
-
-const adminNavItems = [
-  { name: 'Admin Dashboard', href: '/admin' },
-  { name: 'User Management', href: '/admin/users' },
-  { name: 'System Health', href: '/admin/health' },
-  { name: 'Admin Bonuses', href: '/admin/bonuses' },
-  { name: 'Document Preview', href: '/admin/preview' },
-  { name: 'Signature Management', href: '/admin/signatures' },
-];
 
 interface NavigationItemsProps {
   role: 'guest' | 'user' | 'admin';
@@ -86,81 +9,173 @@ interface NavigationItemsProps {
 
 const NavigationItems = ({ role }: NavigationItemsProps) => {
   const location = useLocation();
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  
   const isActive = (path: string) => location.pathname === path;
 
-  if (role === 'guest') {
-    return (
-      <div className="hidden lg:flex items-center space-x-8">
-        <Link
-          to="/"
-          className={cn(
-            "text-sm font-medium transition-colors hover:text-primary relative px-3 py-2 rounded-md",
-            isActive('/') ? "text-primary bg-primary/10" : "text-foreground"
-          )}
-        >
-          Home
-        </Link>
+  const handleDropdownToggle = (dropdown: string) => {
+    setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+  };
 
-        <NavigationDropdown
-          title="Products"
-          items={guestDropdownItems.products}
-        />
+  const closeDropdown = () => {
+    setOpenDropdown(null);
+  };
 
-        <NavigationDropdown
-          title="Resources"
-          items={guestDropdownItems.resources}
-        />
+  const productsItems = [
+    { name: 'AutoSign', href: '/autosign', description: 'Automated document signing' },
+    { name: 'AutoType', href: '/autotype', description: 'Intelligent document generation' },
+    { name: 'Templates', href: '/templates', description: 'Pre-built document templates' },
+  ];
 
-        <NavigationDropdown
-          title="Company"
-          items={guestDropdownItems.company}
-        />
-
-        <Link
-          to="/pricing"
-          className={cn(
-            "text-sm font-medium transition-colors hover:text-primary relative px-3 py-2 rounded-md",
-            isActive('/pricing') ? "text-primary bg-primary/10" : "text-foreground"
-          )}
-        >
-          <CreditCard className="inline h-4 w-4 mr-1" />
-          Plans and Pricing
-        </Link>
-      </div>
-    );
-  }
-
-  // User and Admin navigation (existing logic)
-  let primaryNavItems;
-  switch (role) {
-    case 'admin':
-      primaryNavItems = adminNavItems;
-      break;
-    case 'user':
-      primaryNavItems = userNavItems;
-      break;
-    default:
-      primaryNavItems = [];
-  }
+  const resourcesItems = [
+    { name: 'Blog', href: '/blog', description: 'Latest insights and updates' },
+    { name: 'How to Use', href: '/how-to-use', description: 'Step-by-step guides' },
+    { name: 'FAQ', href: '/faq', description: 'Frequently asked questions' },
+    { name: 'Support', href: '/support', description: 'Get help when you need it' },
+  ];
 
   return (
-    <div className="hidden lg:flex items-center space-x-6">
-      {primaryNavItems.map((item) => (
-        <Link
-          key={item.name}
-          to={item.href}
+    <div className="flex items-center space-x-8">
+      {/* Products Dropdown */}
+      <div className="relative group">
+        <button
+          onClick={() => handleDropdownToggle('products')}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary relative px-3 py-2 rounded-md",
-            isActive(item.href)
-              ? role === 'admin' 
-                ? "text-red-600 bg-red-50" 
-                : "text-primary bg-primary/10"
-              : "text-foreground"
+            "flex items-center space-x-1 text-sm font-medium transition-colors duration-200 py-2 px-3 rounded-md",
+            productsItems.some(item => isActive(item.href)) || openDropdown === 'products'
+              ? "text-brand-600 bg-brand-50"
+              : "text-gray-700 hover:text-brand-600"
           )}
         >
-          {item.name}
-        </Link>
-      ))}
+          <span>Products</span>
+          <ChevronDown 
+            className={cn(
+              "h-4 w-4 transition-transform duration-200",
+              openDropdown === 'products' && "rotate-180"
+            )} 
+          />
+        </button>
+
+        {openDropdown === 'products' && (
+          <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+            <div className="p-4 space-y-2">
+              {productsItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={closeDropdown}
+                  className={cn(
+                    "flex flex-col p-3 rounded-lg transition-colors duration-150 group/item",
+                    isActive(item.href) 
+                      ? "text-brand-600 bg-brand-50" 
+                      : "text-gray-700 hover:bg-gray-50"
+                  )}
+                >
+                  <div className="font-medium group-hover/item:text-brand-600 transition-colors">
+                    {item.name}
+                  </div>
+                  <div className="text-sm text-gray-500 mt-0.5">
+                    {item.description}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Resources Dropdown */}
+      <div className="relative group">
+        <button
+          onClick={() => handleDropdownToggle('resources')}
+          className={cn(
+            "flex items-center space-x-1 text-sm font-medium transition-colors duration-200 py-2 px-3 rounded-md",
+            resourcesItems.some(item => isActive(item.href)) || openDropdown === 'resources'
+              ? "text-brand-600 bg-brand-50"
+              : "text-gray-700 hover:text-brand-600"
+          )}
+        >
+          <span>Resources</span>
+          <ChevronDown 
+            className={cn(
+              "h-4 w-4 transition-transform duration-200",
+              openDropdown === 'resources' && "rotate-180"
+            )} 
+          />
+        </button>
+
+        {openDropdown === 'resources' && (
+          <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+            <div className="p-4 space-y-2">
+              {resourcesItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={closeDropdown}
+                  className={cn(
+                    "flex flex-col p-3 rounded-lg transition-colors duration-150 group/item",
+                    isActive(item.href) 
+                      ? "text-brand-600 bg-brand-50" 
+                      : "text-gray-700 hover:bg-gray-50"
+                  )}
+                >
+                  <div className="font-medium group-hover/item:text-brand-600 transition-colors">
+                    {item.name}
+                  </div>
+                  <div className="text-sm text-gray-500 mt-0.5">
+                    {item.description}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Direct Links */}
+      <Link
+        to="/about"
+        className={cn(
+          "text-sm font-medium transition-colors duration-200 py-2 px-3 rounded-md",
+          isActive('/about') 
+            ? "text-brand-600 bg-brand-50" 
+            : "text-gray-700 hover:text-brand-600"
+        )}
+      >
+        About
+      </Link>
+
+      <Link
+        to="/pricing"
+        className={cn(
+          "text-sm font-medium transition-colors duration-200 py-2 px-3 rounded-md",
+          isActive('/pricing') 
+            ? "text-brand-600 bg-brand-50" 
+            : "text-gray-700 hover:text-brand-600"
+        )}
+      >
+        Pricing
+      </Link>
+
+      <Link
+        to="/contact"
+        className={cn(
+          "text-sm font-medium transition-colors duration-200 py-2 px-3 rounded-md",
+          isActive('/contact') 
+            ? "text-brand-600 bg-brand-50" 
+            : "text-gray-700 hover:text-brand-600"
+        )}
+      >
+        Contact
+      </Link>
+
+      {/* Close dropdowns when clicking outside */}
+      {openDropdown && (
+        <div 
+          className="fixed inset-0 z-40" 
+          onClick={closeDropdown}
+        />
+      )}
     </div>
   );
 };
