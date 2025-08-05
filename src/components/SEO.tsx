@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet-async";
 
 // Usage: <SEO title="TITLE" description="DESC" />
 const SEO = ({
-  title = "MyTypist — Digital Typing, Documents, eSignatures",
-  description = "Generate and manage documents online. E-signature platform for teams and businesses.",
+  title = "MyTypist — AI Document Automation & Generation Platform",
+  description = "Create professional documents in seconds with AI-powered automation. Smart templates, intelligent formatting, and seamless document generation for businesses.",
   image = "",
   url = "",
 }) => (

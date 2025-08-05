@@ -7,8 +7,9 @@ import { cn } from '@/lib/utils';
 // Mobile navigation structure (simplified for mobile)
 const guestMobileNavItems = [
   { name: 'Home', href: '/' },
-  { name: 'AutoSign', href: '/autosign' },
+  { name: 'Document Automation', href: '/document-automation' },
   { name: 'AutoType', href: '/autotype' },
+  { name: 'Templates', href: '/templates' },
   { name: 'How to Use', href: '/how-to-use' },
   { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
@@ -33,7 +34,7 @@ const adminNavItems = [
   { name: 'System Health', href: '/admin/health' },
   { name: 'Admin Bonuses', href: '/admin/bonuses' },
   { name: 'Document Preview', href: '/admin/preview' },
-  { name: 'Signature Management', href: '/admin/signatures' },
+  { name: 'Template Management', href: '/admin/upload-template' },
 ];
 
 interface MobileMenuProps {

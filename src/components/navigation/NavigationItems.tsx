@@ -9,15 +9,15 @@ import NavigationDropdown from './NavigationDropdown';
 const guestDropdownItems = {
   products: [
     { 
-      name: 'AutoSign', 
-      href: '/autosign', 
-      description: 'Automated digital signature workflows',
+      name: 'Document Automation', 
+      href: '/document-automation', 
+      description: 'AI-powered document creation and automation',
       icon: <FileText className="h-5 w-5" />
     },
     { 
       name: 'AutoType', 
       href: '/autotype', 
-      description: 'AI-powered document generation',
+      description: 'Intelligent document generation',
       icon: <Zap className="h-5 w-5" />
     },
   ],
@@ -77,7 +77,7 @@ const adminNavItems = [
   { name: 'System Health', href: '/admin/health' },
   { name: 'Admin Bonuses', href: '/admin/bonuses' },
   { name: 'Document Preview', href: '/admin/preview' },
-  { name: 'Signature Management', href: '/admin/signatures' },
+  { name: 'Template Management', href: '/admin/upload-template' },
 ];
 
 interface NavigationItemsProps {

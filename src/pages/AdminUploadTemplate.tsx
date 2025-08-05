@@ -227,7 +227,7 @@ You can use placeholders like:
 - {{company_name}} for dynamic company name
 - {{client_name}} for client information  
 - {{date}} for current date
-- {{signature}} for signature fields
+- {{field}} for input fields
 
 This will be replaced with actual values when users create documents from this template."
                       className="min-h-[580px] lg:min-h-[680px] text-sm font-mono resize-none"

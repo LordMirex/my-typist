@@ -34,7 +34,7 @@ const AdminPreview = () => {
       createdAt: '2024-12-10',
       size: '2.4 MB',
       pages: 12,
-      signatures: 2,
+      fields: 2,
       priority: 'high'
     },
     {
@@ -46,7 +46,7 @@ const AdminPreview = () => {
       createdAt: '2024-12-08',
       size: '1.2 MB',
       pages: 3,
-      signatures: 1,
+      fields: 1,
       priority: 'normal'
     },
     {
@@ -58,7 +58,7 @@ const AdminPreview = () => {
       createdAt: '2024-12-07',
       size: '3.1 MB',
       pages: 8,
-      signatures: 0,
+      fields: 0,
       priority: 'urgent'
     },
     {
@@ -70,7 +70,7 @@ const AdminPreview = () => {
       createdAt: '2024-12-05',
       size: '5.8 MB',
       pages: 24,
-      signatures: 3,
+      fields: 3,
       priority: 'normal'
     }
   ];
@@ -278,8 +278,8 @@ const AdminPreview = () => {
                             <span>{documents.find(d => d.id === selectedDocument)?.pages}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Signatures:</span>
-                            <span>{documents.find(d => d.id === selectedDocument)?.signatures}</span>
+                            <span className="text-gray-600">Fields:</span>
+                            <span>{documents.find(d => d.id === selectedDocument)?.fields}</span>
                           </div>
                         </div>
                       </div>

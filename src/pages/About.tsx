@@ -38,8 +38,8 @@ const About = () => {
               <span className="gradient-text">MyTypist</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              We're revolutionizing how businesses handle documents and signatures. 
-              Our mission is to make document workflows so simple and fast that they become invisible.
+              We're revolutionizing how businesses create and manage documents with AI automation. 
+              Our mission is to make document creation so simple and intelligent that it becomes invisible.
             </p>
           </div>
         </section>
@@ -54,12 +54,12 @@ const About = () => {
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
                   Every day, millions of hours are wasted on manual document creation, 
-                  chasing signatures, and managing paperwork. We believe this time could 
+                  formatting, and repetitive writing tasks. We believe this time could 
                   be better spent growing businesses and serving customers.
                 </p>
                 <p className="text-lg text-gray-600">
-                  MyTypist combines the power of document automation (AutoType) with 
-                  seamless e-signatures (AutoSign) to eliminate these friction points. 
+                  MyTypist combines AI-powered document generation with intelligent templates 
+                  to eliminate these friction points completely. 
                   We're not just building software – we're giving people their time back.
                 </p>
               </div>

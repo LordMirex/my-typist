@@ -19,8 +19,8 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
-              Fast document automation and e-signatures for businesses of all sizes. 
-              Streamline your workflow with MyTypist's powerful AutoType and AutoSign features.
+              AI-powered document automation for businesses of all sizes. 
+              Streamline your workflow with MyTypist's intelligent document generation and smart templates.
             </p>
             <div className="text-sm text-gray-500">
               © 2024 MyTypist. All rights reserved.
