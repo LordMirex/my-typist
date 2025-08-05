@@ -13,8 +13,8 @@ const PricingSection = () => {
       description: 'Perfect for individuals getting started',
       features: [
         '5 documents per month',
-        '2 e-signatures per month',
         'Basic templates',
+        'Document automation',
         'Email support',
         'Basic integrations'
       ],
@@ -29,7 +29,7 @@ const PricingSection = () => {
       description: 'Ideal for small teams and growing businesses',
       features: [
         'Unlimited documents',
-        'Unlimited e-signatures',
+        'Advanced automation',
         'Premium templates',
         'Priority support',
         'Advanced integrations',
@@ -63,16 +63,16 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Simple, Transparent{' '}
-            <span className="gradient-text">Pricing</span>
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Pricing</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose the perfect plan for your business. Start free and upgrade as you grow.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Choose the perfect plan for your document automation needs. Start free and scale as you grow.
           </p>
         </div>
 
@@ -81,16 +81,16 @@ const PricingSection = () => {
           {plans.map((plan, index) => (
             <Card 
               key={plan.name}
-              className={`relative hover:shadow-xl transition-all duration-300 ${
+              className={`relative card-hover ${
                 plan.popular 
-                  ? 'border-brand-500 shadow-lg scale-105' 
-                  : 'border-gray-200 hover:scale-105'
+                  ? 'border-primary shadow-lg scale-105' 
+                  : 'border-border'
               }`}
               style={{ animationDelay: `${index * 150}ms` }}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
+                  <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium flex items-center">
                     <Star className="w-4 h-4 mr-1" />
                     Most Popular
                   </div>
@@ -98,32 +98,32 @@ const PricingSection = () => {
               )}
 
               <CardHeader className="text-center pb-8 pt-8">
-                <h3 className={`text-2xl font-bold ${plan.popular ? 'text-brand-600' : 'text-gray-900'}`}>
+                <h3 className={`text-2xl font-bold ${plan.popular ? 'text-primary' : 'text-card-foreground'}`}>
                   {plan.name}
                 </h3>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                  <span className="text-gray-500 ml-1">/{plan.period}</span>
+                  <span className="text-4xl font-bold text-card-foreground">{plan.price}</span>
+                  <span className="text-muted-foreground ml-1">/{plan.period}</span>
                 </div>
-                <p className="text-gray-600 mt-2">{plan.description}</p>
+                <p className="text-muted-foreground mt-2">{plan.description}</p>
               </CardHeader>
 
               <CardContent className="px-8 pb-8">
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                      <CheckCircle className="w-5 h-5 text-primary mr-3 flex-shrink-0" />
+                      <span className="text-card-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link to={plan.href} className="block">
                   <Button 
-                    className={`w-full py-3 ${
+                    className={`w-full py-3 btn-animate ${
                       plan.popular 
-                        ? 'bg-brand-600 hover:bg-brand-700 text-white' 
-                        : 'bg-white hover:bg-gray-50 text-gray-900 border border-gray-300'
+                        ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                        : 'bg-background hover:bg-muted text-foreground border border-border'
                     }`}
                   >
                     {plan.cta}
@@ -135,9 +135,9 @@ const PricingSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             All plans include a 14-day free trial. No credit card required.{' '}
-            <Link to="/pricing" className="text-brand-600 hover:text-brand-700 font-medium">
+            <Link to="/pricing" className="text-primary hover:text-primary/80 font-medium">
               View detailed comparison →
             </Link>
           </p>

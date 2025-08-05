@@ -17,16 +17,16 @@ const HeroSection = () => {
           {/* Optimized badge */}
           <div className="inline-flex items-center px-6 py-3 bg-secondary text-secondary-foreground rounded-full text-sm font-medium mb-8 animate-fade-in">
             <Zap className="w-4 h-4 mr-2 text-primary" />
-            <span className="font-semibold">Lightning-Fast Document Automation</span>
+            <span className="font-semibold">AI-Powered Document Automation</span>
             <span className="ml-2 px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full">NEW</span>
           </div>
 
           {/* Optimized main headline */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
-            <span className="text-foreground">Automate Documents &</span>
+            <span className="text-foreground">Transform Your</span>
             <br />
             <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              E-Signatures
+              Document Workflow
             </span>
             <br />
             <span className="text-foreground text-4xl sm:text-5xl lg:text-6xl">in Minutes</span>
@@ -34,21 +34,21 @@ const HeroSection = () => {
 
           {/* Optimized subheadline */}
           <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto animate-fade-in leading-relaxed">
-            MyTypist revolutionizes document workflows with <span className="font-semibold text-primary">AI-powered automation</span> and 
-            <span className="font-semibold text-primary"> seamless e-signatures</span>. 
-            Transform your business processes in minutes, not hours.
+            MyTypist revolutionizes how you create, manage, and distribute documents with <span className="font-semibold text-primary">intelligent automation</span> and 
+            <span className="font-semibold text-primary"> smart templates</span>. 
+            Say goodbye to manual document processing forever.
           </p>
 
           {/* Optimized CTA section */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in">
             <Link to="/signup">
-              <Button size="lg" className="px-10 py-6 text-lg font-semibold group">
+              <Button size="lg" className="px-10 py-6 text-lg font-semibold group btn-animate">
                 Start Free Trial
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link to="/how-to-use">
-              <Button variant="outline" size="lg" className="px-10 py-6 text-lg font-semibold group">
+              <Button variant="outline" size="lg" className="px-10 py-6 text-lg font-semibold group btn-animate">
                 <Play className="mr-2 h-5 w-5" />
                 Watch Demo
               </Button>
@@ -98,25 +98,28 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Optimized hero demo section */}
+        {/* Video Demo Section */}
         <div className="mt-20 animate-fade-in">
           <div className="bg-card rounded-3xl shadow-lg p-8 border">
-            <div className="aspect-video bg-gradient-to-br from-muted/50 to-muted rounded-2xl flex items-center justify-center relative">
-              <div className="text-center">
+            <div className="aspect-video bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl flex items-center justify-center relative overflow-hidden">
+              {/* Video placeholder with play button */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
+              <div className="text-center z-10">
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                    <FileText className="w-10 h-10 text-primary-foreground" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
+                  <div className="w-20 h-20 bg-primary/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto shadow-lg border border-primary/20">
+                    <Play className="w-10 h-10 text-primary ml-1" />
                   </div>
                 </div>
-                <h3 className="text-foreground font-bold text-xl mb-2">Interactive Demo</h3>
-                <p className="text-muted-foreground text-lg mb-4">See MyTypist in action</p>
-                <Button>
-                  <Play className="mr-2 h-4 w-4" />
-                  Launch Demo
+                <h3 className="text-foreground font-bold text-2xl mb-2">See Document Automation in Action</h3>
+                <p className="text-muted-foreground text-lg mb-6">Watch how MyTypist transforms your workflow in under 2 minutes</p>
+                <Button size="lg" className="px-8 py-3 btn-animate">
+                  <Play className="mr-2 h-5 w-5" />
+                  Watch Demo Video
                 </Button>
+              </div>
+              {/* Video thumbnail overlay */}
+              <div className="absolute bottom-4 right-4 bg-background/80 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-muted-foreground">
+                2:15 min
               </div>
             </div>
           </div>
